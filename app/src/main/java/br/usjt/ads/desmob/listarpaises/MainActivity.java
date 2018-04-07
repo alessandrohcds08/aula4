@@ -13,37 +13,35 @@ import android.widget.Spinner;
  * RA 816117880
  */
 
- public class MainActivity extends Activity {
-        Spinner spinnerContinente;
-        public static final String CHAVE = "br.usjt.desmob.listarpaises.txtContinente";
-        String continente = "Todos";
+public class MainActivity extends Activity {
+    Spinner spinnerContinente;
+    public static final String CHAVE = "br.usjt.ads.desmob.listarpaises.txtContinente";
+    String continente = "Todos";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        spinnerContinente = (Spinner)findViewById(R.id.spinnerContinente);
+        spinnerContinente.setOnItemSelectedListener(new PaisSelecionado());
+    }
+
+    public void listarPaises(View view){
+        Intent intent = new Intent(this, ListaPaisesActivity.class);
+
+        intent.putExtra(CHAVE, continente);
+        startActivity(intent);
+    }
+
+    private class PaisSelecionado implements AdapterView.OnItemSelectedListener {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            continente = (String) parent.getItemAtPosition(position);
+        }
 
         @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.activity_main);
-            spinnerContinente = (Spinner)findViewById(R.id.spinnerContinente);
-            spinnerContinente.setOnItemSelectedListener(new PaisSelecionado());
+        public void onNothingSelected(AdapterView<?> parent) {
+
         }
-
-         public void listarPaises(View view){
-         Intent intent = new Intent(this, ListaPaisesActivity.class);
-
-         intent.putExtra(CHAVE, continente);
-         startActivity(intent);
-     }
-
-
-     private class PaisSelecionado implements AdapterView.OnItemSelectedListener {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                continente = (String) parent.getItemAtPosition(position);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        }
-
     }
+}

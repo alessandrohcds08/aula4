@@ -192,7 +192,6 @@ public class Pais implements Serializable, Comparable {
         if (o == null || o.getClass() != getClass()) {
             return 0;
         } else {
-
             Pais pais = (Pais) o;
             Collator c = Collator.getInstance();
             c.setStrength(Collator.PRIMARY);
